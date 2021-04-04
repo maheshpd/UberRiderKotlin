@@ -139,8 +139,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
         val edt_first_name = itemView.findViewById<View>(R.id.edt_first_name) as TextInputEditText
         val edt_last_name = itemView.findViewById<View>(R.id.edt_last_name) as TextInputEditText
-        val edt_phone_number =
-            itemView.findViewById<View>(R.id.edit_phone_number) as TextInputEditText
+        val edt_phone_number = itemView.findViewById<View>(R.id.edit_phone_number) as TextInputEditText
 
         val btn_continue = itemView.findViewById<View>(R.id.btn_register) as Button
 
@@ -148,7 +147,7 @@ class SplashScreenActivity : AppCompatActivity() {
         if (FirebaseAuth.getInstance().currentUser!!.phoneNumber != null &&
             !TextUtils.isDigitsOnly(FirebaseAuth.getInstance().currentUser!!.phoneNumber)
         )
-            edit_phone_number.setText(FirebaseAuth.getInstance().currentUser!!.phoneNumber)
+            edt_phone_number.setText(FirebaseAuth.getInstance().currentUser!!.phoneNumber)
 
         //View
         builder.setView(itemView)
@@ -215,5 +214,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun goToHomeActivity(model: RiderModel?) {
         Common.currentRider = model  //Don't forget it, please !!!
+        startActivity(Intent(this,MainActivity::class.java))
+        finish()
     }
 }
