@@ -11,9 +11,15 @@ import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.createsapp.uberriderkotlin.R
+import com.createsapp.uberriderkotlin.model.DriverGeoModel
 import com.createsapp.uberriderkotlin.model.RiderModel
+import com.google.android.gms.maps.model.Marker
 
 object Common {
+    val markerList: MutableMap<String, Marker> = HashMap<String,Marker>()
+    val DRIVER_INFO_REFERENCE: String = "DriverInfo"
+    val driversFound: MutableSet<DriverGeoModel> = HashSet<DriverGeoModel>()
+    val DRIVERS_LOCATION_REFERENCES: String = "DriversLocation" //Same as Server app
     val TOKEN_REFERENCE: String = "Token"
     var currentRider: RiderModel? = null
     const val RIDER_INFO_REFERENCE: String = "Riders"
@@ -73,6 +79,10 @@ object Common {
             builder.setContentIntent(pendingIntent)
         val notification = builder.build()
         notificationManager.notify(id, notification)
+    }
+
+    fun buildName(firstName: String?, lastName: String?): String? {
+        return java.lang.StringBuilder(firstName).append(" ").append(lastName).toString()
     }
 
 }
